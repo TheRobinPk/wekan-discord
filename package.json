@@ -1,0 +1,13 @@
+{
+  "name": "wekan-discord",
+  "version": "0.1.0",
+  "description": "Formatter for WeKan webhooks, making them all Discord-embed pretty.",
+  "main": "main.js",
+  "repository": "https://github.com/mibmo/wekan-discord",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.19.1",
+    "discord.js": "^13.6.0",
+    "express": "^4.17.2"
+  }
+}
