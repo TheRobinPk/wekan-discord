@@ -43,7 +43,7 @@ jobs:
            
       # build and test the apps     
       
-  push_to_Docker_Hub:
+  push_container_image:
       # The type of runner that the job will run on
       runs-on: ubuntu-latest
       # build docker image and push to docker hub
@@ -79,7 +79,7 @@ jobs:
             context: ./
             file: ./Dockerfile
             push: true
-            tags: ${{ steps.meta.outputs.labels }}
+            tags: ${{ env.REGISTRY}}/${{ env.IMAGE_NAME }}
 
         - name: Run the image in a container
           uses: addnab/docker-run-action@v3
