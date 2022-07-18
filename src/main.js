@@ -39,6 +39,8 @@ function formatEmbed(data) {
 
 app.use(bodyParser.json());
 
+app.get("/healthz", (_, res) => { res.status(200).end() } );
+
 app.post("/api/webhooks/:id/:token", (req, res) => {
 	console.log("Responding to webhook, text: " + req.body.text.split('\n')[0]);
 
