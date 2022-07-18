@@ -72,6 +72,8 @@ pm2 start src/main.js \
 Realtime monitoring is then available using `pm2 monit`.
 
 ### systemd
+A systemd service is available at [`deploy/wekan-discord.service`](deploy/wekan-discord.service).
+To run, wekan-discord must be cloned to `/opt/wekan-discord` and the node modules must already have been downloaded.
 
 ## Privacy
 Data logged by a wekan-discord instance is as follows:
