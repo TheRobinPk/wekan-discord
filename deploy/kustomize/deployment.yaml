@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wekan-discord
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: wekan-discord
+  template:
+    metadata:
+      labels:
+        app: wekan-discord
+    spec:
+      containers:
+        - name: wekan-discord
+          image: ghcr.io/mibmo/wekan-discord:latest
+          ports:
+            - containerPort: 8080
+              name: http
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: http
+            periodSeconds: 10
+          startupProbe:
+            httpGet:
+              path: /healthz
+              port: http
+            failureThreshold: 30
+            periodSeconds: 10
+          env:
+            - name: PORT
+              value: "8080"
