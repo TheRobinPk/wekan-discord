@@ -1,0 +1,12 @@
+[Unit]
+Description=wekan-discord
+After=network.target
+
+[Service]
+Environment=PORT=8080
+Type=simple
+ExecStart=/usr/bin/node /opt/wekan-discord/src/main.js
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
