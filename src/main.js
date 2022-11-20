@@ -26,8 +26,8 @@ function formatEmbed(data) {
 	}[data.description];
 
 	let desc = {
-		"act-createCard": `in **${q[1]}**`,
-		"act-moveCard": `**${q[2]}** :arrow_right: **${q[4]}**`,
+		"act-createCard": `*${q[0]}*\n in **${q[1]}**`,
+		"act-moveCard": `*${q[0]}*\n **${q[2]}** :arrow_right: **${q[4]}**`,
 	}[data.description];
 
 	let embed = new MessageEmbed()
