@@ -26,7 +26,7 @@ function formatEmbed(data) {
 	}[data.description];
 
 	let desc = {
-		"act-createCard": `in **${q[2]}**`,
+		"act-createCard": `in **${q[1]}**`,
 		"act-moveCard": `**${q[2]}** :arrow_right: **${q[4]}**`,
 	}[data.description];
 
