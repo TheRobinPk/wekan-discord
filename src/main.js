@@ -17,14 +17,25 @@ function formatEmbed(data) {
 	let q = Array.from(text.matchAll(/ "([a-zA-Z0-9 ]*)" /g), m => m[1]);
 
 	// wekan webhook docs: https://github.com/wekan/wekan/wiki/Webhook-data
+	
 	let title = {
-		"act-createCard": `*${user}* created card **"${q[0]}"** in list *${q[1]} (${q[2]})*`,
-		"act-moveCard": `*${user}* moved card **"${q[0]}"** moved from *${q[2]}* to *${q[4]}*`,
+		"act-createCard": `:pencil2: created card`,
+		//"act-createCard": `created card **"${q[0]}"** in list *${q[1]} (${q[2]})*`,
+		//"act-moveCard": `*${user}* moved card **"${q[0]}"** moved from *${q[2]}* to *${q[4]}*`,
+		"act-moveCard": `:left_right_arrow: moved card`,
+	}[data.description];
+
+	let desc = {
+		"act-createCard": `in **${q[2]}**`,
+		"act-moveCard": `**${q[2]}** :arrow_right: **${q[4]}**`,
 	}[data.description];
 
 	let embed = new MessageEmbed()
+		.setAuthor( {name: `${user}`})
 		.setTitle(title)
-		.setColor('#0099ff')
+		.setURL(actionLink)
+		.setDescription(desc)
+		.setColor('#e2bb1e')
 	;
 
 	return embed;
