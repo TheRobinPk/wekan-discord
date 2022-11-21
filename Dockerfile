@@ -1,6 +1,5 @@
 FROM docker.io/node:17-alpine AS builder
 WORKDIR /build
-#RUN apk add
 RUN npm install -g @vercel/ncc
 
 ADD package.json .
