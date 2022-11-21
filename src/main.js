@@ -17,10 +17,10 @@ function formatEmbed(data) {
 	let q = Array.from(text.matchAll(/ "([a-zA-Z0-9!"#$%&'()*+,-./:;<=>?@[\]^_`\\{|}~ ]*)" /g), m => m[1]);
 
 	// FOR TESTING PURPOSES :
-	/*
+	
 	for(let i=0; i<q.length; i++){
 		console.log(q[i]);
-	}*/
+	}
 	// ------------------------------
 
 	// wekan webhook docs: https://github.com/wekan/wekan/wiki/Webhook-data
