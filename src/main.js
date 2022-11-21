@@ -14,7 +14,7 @@ function formatEmbed(data) {
 	let actionLink = data.text.split('\n')[1];
 
 	let words = text.slice(user.length + 1, text.length).split(' ');
-	let q = Array.from(text.matchAll(/ "([a-zA-Z0-9\-._ ]*)" /g), m => m[1]);
+	let q = Array.from(text.matchAll(/ "([a-zA-Z0-9\-._' ]*)" /g), m => m[1]);
 
 	// FOR TESTING PURPOSES :
 	/*
