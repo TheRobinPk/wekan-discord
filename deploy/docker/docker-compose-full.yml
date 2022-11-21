@@ -1,0 +1,51 @@
+#docker-compose.yml with wekan and mongodb
+#full documentation at : https://github.com/wekan/wekan/blob/master/docker-compose.yml
+version: '3'
+
+services:
+  wekan_db:
+    container_name: wekan_db
+    image: mongo:4.4.6
+    restart: unless-stopped
+    command: mongod --logpath /dev/null --oplogSize 128 --quiet
+    networks:
+      - backend
+    volumes:
+      - /etc/timezone:/etc/timezone:ro
+      - ./data/wekan-db:/data/db
+      - ./data/wekan-db-dump:/dump
+
+  wekan_app:
+    container_name: wekan_app
+    image: quay.io/wekan/wekan
+    restart: unless-stopped
+    networks:
+      - backend
+      - frontend
+    ports:
+      - 7777:8080
+    environment:
+      - WRITABLE_PATH=/data
+      - MONGO_URL=mongodb://wekan_db:27017/wekan
+      - ROOT_URL=https://your.url/
+      - BROWSER_POLICY_ENABLED=true
+    depends_on:
+      - wekan_db
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./data/wekan-files:/data
+
+  wekan_discord:
+    container_name: wekan_discord
+    image: weidus/wekan-discord
+    user: 1001:1001
+    networks:
+      - frontend
+      - backend
+    restart: unless-stopped
+
+networks:
+  frontend:
+    driver: bridge
+  backend:
+    internal: true
