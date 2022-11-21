@@ -14,20 +14,24 @@ function formatEmbed(data) {
 	let actionLink = data.text.split('\n')[1];
 
 	let words = text.slice(user.length + 1, text.length).split(' ');
-	let q = Array.from(text.matchAll(/ "([a-zA-Z0-9 ]*)" /g), m => m[1]);
+	let q = Array.from(text.matchAll(/ "([a-zA-Z0-9\-._" ]*)" /g), m => m[1]);
 
 	// wekan webhook docs: https://github.com/wekan/wekan/wiki/Webhook-data
-	
+	//create on wiki: card 0 ; list 1 ; swim 2 ; board 3
+	//move on wiki: card 0 ; board 1 ; list 2 ; swim 3; newList 4 ; newSwim 5 ; 
+	//"act-moveCard": card 0 ; board 1 ; oldList 2 ; oldSwimlane 3 ; list 4 ; swimlane 5
+	//"act-createCard" : card 0 ; list 1 ; swimlane 2 ; board 3;
+
 	let title = {
 		"act-createCard": `:pencil2: created card`,
+		"act-moveCard": `:left_right_arrow: moved card`,
 		//"act-createCard": `created card **"${q[0]}"** in list *${q[1]} (${q[2]})*`,
 		//"act-moveCard": `*${user}* moved card **"${q[0]}"** moved from *${q[2]}* to *${q[4]}*`,
-		"act-moveCard": `:left_right_arrow: moved card`,
 	}[data.description];
 
 	let desc = {
-		"act-createCard": `*${q[0]}*\n in **${q[1]}**`,
-		"act-moveCard": `*${q[0]}*\n **${q[2]}** :arrow_right: **${q[4]}**`,
+		"act-createCard": `*${data.card}*\n in **${q[1]}**`,
+		"act-moveCard": `*${data.card}*\n **${q[2]}** :arrow_right: **${q[4]}**`,
 	}[data.description];
 
 	let embed = new MessageEmbed()
