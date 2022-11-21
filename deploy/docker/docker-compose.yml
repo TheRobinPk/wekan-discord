@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  wekan_discord:
+    container_name: wekan_discord
+    image: weidus/wekan-discord
+    user: 1001:1001
+    ports: 
+      - 10080:10080
+    restart: unless-stopped
