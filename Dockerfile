@@ -1,7 +1,6 @@
 FROM docker.io/node:17-alpine AS builder
 WORKDIR /build
-#RUN npm install -g @vercel/ncc
-RUN npm install -g npm@8.11.0
+RUN npm install -g @vercel/ncc
 
 ADD package.json .
 RUN npm install --production
