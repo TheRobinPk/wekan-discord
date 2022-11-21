@@ -17,23 +17,20 @@ function formatEmbed(data) {
 	let q = Array.from(text.matchAll(/ "([a-zA-Z0-9\-._ ]*)" /g), m => m[1]);
 
 	// FOR TESTING PURPOSES :
+	/*
 	for(let i=0; i<q.length; i++){
 		console.log(q[i]);
-	}
-
+	}*/
 	// ------------------------------
 
 	// wekan webhook docs: https://github.com/wekan/wekan/wiki/Webhook-data
-	//create on wiki: card 0 ; list 1 ; swim 2 ; board 3
-	//move on wiki: card 0 ; board 1 ; list 2 ; swim 3; newList 4 ; newSwim 5 ; 
+	 
 	//"act-moveCard": card 0 ; board 1 ; oldList 2 ; oldSwimlane 3 ; list 4 ; swimlane 5
 	//"act-createCard" : card 0 ; list 1 ; swimlane 2 ; board 3;
 
 	let title = {
 		"act-createCard": ':pencil2: created card',
 		"act-moveCard": ':left_right_arrow: moved card',
-		//"act-createCard": `created card **"${q[0]}"** in list *${q[1]} (${q[2]})*`,
-		//"act-moveCard": `*${user}* moved card **"${q[0]}"** moved from *${q[2]}* to *${q[4]}*`,
 	}[data.description];
 
 	let desc = {
