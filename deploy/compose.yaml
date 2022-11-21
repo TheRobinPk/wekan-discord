@@ -1,8 +1,0 @@
-version: '3'
-
-services:
-	wekan-discord:
-		image: ghcr.io/mibmo/wekan-discord:latest
-		restart: unless-stopped
-		ports:
-			- 8080:10080
