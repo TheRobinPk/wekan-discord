@@ -14,7 +14,14 @@ function formatEmbed(data) {
 	let actionLink = data.text.split('\n')[1];
 
 	let words = text.slice(user.length + 1, text.length).split(' ');
-	let q = Array.from(text.matchAll(/ "([a-zA-Z0-9\-._" ]*)" /g), m => m[1]);
+	let q = Array.from(text.matchAll(/ "([a-zA-Z0-9\-._ ]*)" /g), m => m[1]);
+
+	// FOR TESTING PURPOSES :
+	for(let i=0; i<q.length; i++){
+		console.log(q[i]);
+	}
+
+	// ------------------------------
 
 	// wekan webhook docs: https://github.com/wekan/wekan/wiki/Webhook-data
 	//create on wiki: card 0 ; list 1 ; swim 2 ; board 3
@@ -23,8 +30,8 @@ function formatEmbed(data) {
 	//"act-createCard" : card 0 ; list 1 ; swimlane 2 ; board 3;
 
 	let title = {
-		"act-createCard": `:pencil2: created card`,
-		"act-moveCard": `:left_right_arrow: moved card`,
+		"act-createCard": ':pencil2: created card',
+		"act-moveCard": ':left_right_arrow: moved card',
 		//"act-createCard": `created card **"${q[0]}"** in list *${q[1]} (${q[2]})*`,
 		//"act-moveCard": `*${user}* moved card **"${q[0]}"** moved from *${q[2]}* to *${q[4]}*`,
 	}[data.description];
